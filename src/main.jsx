@@ -15,7 +15,6 @@ import IndexPage from './pages/IndexPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import MovieDetailPage from './pages/MovieDetailPage.jsx';
 import YourRatingsPage from './pages/YourRatingsPage.jsx';
-import { getAllMovies } from './api/movieData.js';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,7 +27,7 @@ const router = createBrowserRouter(
         path="movies"
         element={<AllMoviesPage />}
         loader={async () => {
-          const res = await getAllMovies();
+          const res = await axios.get('/api/movies/all').then(api => api.data.response );          
           
           return {movies: res};
         }}
